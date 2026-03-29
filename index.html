@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>千金胡言出阁 - 人情礼簿</title>
-      <link rel="icon" href="dangao.png" type="image/png">
+      <link rel="icon" href="rq.JPG" type="image/JPG">
     
     <meta property="og:title" content="千金胡言出阁 - 人情礼簿">
-    <meta property="og:description" content="胡燚定制">
+    <meta property="og:description" content="胡燚研发定制">
     <meta property="og:image" content="https://huyi7527.github.io/rq/rq.JPG">
     <meta property="og:url" content="https://huyi7527.github.io/rq/">
     <meta property="og:type" content="website">
     
     <meta itemprop:name" content="千金胡言出阁 - 人情礼簿">
-    <meta itemprop:description" content="胡燚定制">
+    <meta itemprop:description" content="胡燚研发定制">
     <meta itemprop:image" content="https://huyi7527.github.io/rq/rq.JPG">
 <style>
 * {
@@ -31,6 +31,34 @@ body {
   font-size: 14px;
   color: #666;
   margin-bottom: 10px;
+}
+
+/* 轮播图 */
+.swiper {
+  max-width: 480px;
+  height: 220px;
+  margin: 0 auto 16px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  display: none;
+}
+.swiper-wrap {
+  display: flex;
+  width: 300%;
+  height: 100%;
+  transition: 0.4s;
+}
+.swiper-item {
+  width: 100%;
+  height: 100%;
+}
+.swiper-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* 登录页 */
@@ -196,6 +224,15 @@ td {
 <!-- 时间 -->
 <div class="time" id="nowTime"></div>
 
+<!-- 轮播图 -->
+<div class="swiper" id="swiperBox">
+  <div class="swiper-wrap" id="swiperWrap">
+    <div class="swiper-item"><img src="https://huyi7527.github.io/rq/rq1.JPG"></div>
+    <div class="swiper-item"><img src="https://huyi7527.github.io/rq/rq2.JPG"></div>
+    <div class="swiper-item"><img src="https://huyi7527.github.io/rq/rq3.JPG"></div>
+  </div>
+</div>
+
 <!-- 登录封面 -->
 <div class="login-box" id="loginBox">
   <div class="login-title">千金胡言出阁人情礼簿</div>
@@ -206,7 +243,7 @@ td {
 </div>
 
 <div class="copyright" id="copyLogin">
-  版权所有 © 2026 胡燚｜专业定制开发
+  版权所有 © 2026 胡燚｜专业定制开发网站
 </div>
 
 <!-- 主内容 -->
@@ -266,6 +303,15 @@ function updateTime() {
 setInterval(updateTime, 1000);
 updateTime();
 
+// 轮播图自动播放
+let swiperIndex = 0;
+function autoSwiper(){
+  swiperIndex++;
+  if(swiperIndex >= 3) swiperIndex = 0;
+  document.getElementById('swiperWrap').style.transform = `translateX(-${swiperIndex * 100}%)`;
+}
+setInterval(autoSwiper, 3000);
+
 // 登录
 function login() {
   const user = document.getElementById('username').value.trim();
@@ -275,6 +321,7 @@ function login() {
     document.getElementById('copyLogin').style.display = 'none';
     document.getElementById('mainBox').style.display = 'block';
     document.getElementById('copyMain').style.display = 'block';
+    document.getElementById('swiperBox').style.display = 'block'; // 显示轮播
   } else {
     alert('用户名或密码错误');
   }
