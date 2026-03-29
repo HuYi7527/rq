@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>千金胡言出阁 - 人情礼簿</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #fdf3f4;
+  padding: 20px 12px;
+}
+.time {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* 登录页 */
+.login-box {
+  max-width: 400px;
+  margin: 40px auto 0;
+  background: #fff;
+  border-radius: 24px;
+  padding: 40px 30px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  text-align: center;
+}
+.login-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #b32424;
+  margin-bottom: 10px;
+}
+.login-sub {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 30px;
+}
+.login-input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 0 16px;
+  font-size: 16px;
+  margin-bottom: 16px;
+  outline: none;
+}
+.login-input:focus {
+  border-color: #b32424;
+}
+.login-btn {
+  width: 100%;
+  height: 48px;
+  border-radius: 12px;
+  background: #b32424;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+.copyright {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 12px;
+  color: #999;
+}
+
+/* 主内容页 */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 20px;
+  padding: 22px 18px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  display: none;
+}
+.main-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #b32424;
+  margin-bottom: 6px;
+  white-space: nowrap;
+}
+.main-date {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+}
+.stats {
+  display: flex;
+  justify-content: space-around;
+  background: #fff5f5;
+  border-radius: 12px;
+  padding: 12px 0;
+  margin-bottom: 16px;
+}
+.stat-item {
+  text-align: center;
+}
+.stat-label {
+  font-size: 12px;
+  color: #888;
+}
+.stat-num {
+  font-size: 18px;
+  font-weight: 700;
+  color: #b32424;
+}
+.search-box {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+input {
+  flex: 1;
+  height: 40px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 15px;
+  outline: none;
+}
+.btn {
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: none;
+  background: #b32424;
+  color: #fff;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.table-box {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+  background: #fff;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th {
+  background: #b32424;
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 0;
+  font-weight: 500;
+  cursor: pointer;
+}
+td {
+  text-align: center;
+  padding: 9px 0;
+  font-size: 14px;
+  border-bottom: 1px solid #f6f6f6;
+}
+.name {
+  font-weight: 500;
+  color: #222;
+}
+.main-copyright {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 12px;
+  color: #999;
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 时间 -->
+<div class="time" id="nowTime"></div>
+
+<!-- 登录封面 -->
+<div class="login-box" id="loginBox">
+  <div class="login-title">千金胡言出阁人情礼簿</div>
+  <div class="login-sub">请登录查看</div>
+  <input class="login-input" id="username" value="admin" placeholder="用户名">
+  <input class="login-input" id="password" type="password" value="admin" placeholder="密码">
+  <button class="login-btn" onclick="login()">登录</button>
+</div>
+
+<div class="copyright" id="copyLogin">
+  版权所有 © 2026 胡燚｜专业定制开发
+</div>
+
+<!-- 主内容 -->
+<div class="container" id="mainBox">
+  <div class="main-title">千金胡言出阁 人情礼簿</div>
+  <div class="main-date">2025年10月02日</div>
+
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-label">总户</div>
+      <div class="stat-num" id="totalCount">0</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">总金额</div>
+      <div class="stat-num" id="totalMoney">0</div>
+    </div>
+  </div>
+
+  <div class="search-box">
+    <input type="text" id="search" placeholder="搜索姓名/姓氏">
+    <button class="btn" onclick="search()">搜索</button>
+    <button class="btn" onclick="reset()">重置</button>
+  </div>
+
+  <div class="table-box">
+    <table>
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>姓名</th>
+          <th onclick="sortByMoney()">贺礼(元) ↑↓</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody id="list"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="main-copyright" id="copyMain">
+  版权所有 © 2026 胡燚｜专业定制开发
+</div>
+
+<script>
+// 实时北京时间
+function updateTime() {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth()+1).padStart(2,'0');
+  const d = String(now.getDate()).padStart(2,'0');
+  const h = String(now.getHours()).padStart(2,'0');
+  const i = String(now.getMinutes()).padStart(2,'0');
+  const s = String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('nowTime').innerText = 
+    `北京时间 ${y}-${m}-${d} ${h}:${i}:${s}`;
+}
+setInterval(updateTime, 1000);
+updateTime();
+
+// 登录
+function login() {
+  const user = document.getElementById('username').value.trim();
+  const pwd = document.getElementById('password').value.trim();
+  if (user === 'admin' && pwd === 'admin') {
+    document.getElementById('loginBox').style.display = 'none';
+    document.getElementById('copyLogin').style.display = 'none';
+    document.getElementById('mainBox').style.display = 'block';
+    document.getElementById('copyMain').style.display = 'block';
+  } else {
+    alert('用户名或密码错误');
+  }
+}
+
+// 数据
+const data = [
+{id:1,name:"栾家富",money:200,note:""},{id:2,name:"栾双文",money:200,note:""},{id:3,name:"栾双武",money:200,note:""},{id:4,name:"栾家强",money:200,note:""},{id:5,name:"栾家兵",money:200,note:""},{id:6,name:"胡胜军",money:500,note:""},{id:7,name:"胡胜武",money:500,note:""},{id:8,name:"张明彪",money:200,note:""},{id:9,name:"温翠平",money:300,note:""},{id:10,name:"覃贞权",money:500,note:""},{id:11,name:"胡胜华",money:500,note:""},{id:12,name:"谢华",money:200,note:""},{id:13,name:"张银松",money:200,note:""},{id:14,name:"王成林",money:200,note:""},{id:15,name:"张民状",money:200,note:""},{id:16,name:"张自立",money:200,note:""},{id:17,name:"张列",money:200,note:""},{id:18,name:"张自旭",money:100,note:""},{id:19,name:"钟昌目",money:100,note:""},{id:20,name:"张民浩",money:200,note:""},{id:21,name:"李勇",money:200,note:""},{id:22,name:"张乔",money:500,note:""},{id:23,name:"徐清林",money:200,note:""},{id:24,name:"张献华",money:1000,note:""},{id:25,name:"张献明",money:1000,note:""},{id:26,name:"张雪松",money:500,note:""},{id:27,name:"张献成",money:1000,note:""},{id:28,name:"张民超",money:300,note:""},{id:29,name:"何伟",money:200,note:""},{id:30,name:"张利兴",money:200,note:""},{id:31,name:"张明琼",money:100,note:""},{id:32,name:"邓建刚",money:200,note:""},{id:33,name:"张韩彪",money:200,note:""},{id:34,name:"张敏",money:300,note:""},{id:35,name:"牟来佩",money:200,note:""},{id:36,name:"张明奎",money:100,note:""},{id:37,name:"谢进",money:200,note:""},{id:38,name:"张建明",money:200,note:""},{id:39,name:"张利",money:200,note:""},{id:40,name:"张建光",money:200,note:""},{id:41,name:"周店富",money:500,note:""},{id:42,name:"周店秀",money:500,note:""},{id:43,name:"张明川",money:1000,note:""},{id:44,name:"罗继华",money:200,note:""},{id:45,name:"牟方雕",money:200,note:""},{id:46,name:"张精彬",money:200,note:""},{id:47,name:"张自高",money:500,note:""},{id:48,name:"张毅",money:300,note:""},{id:49,name:"张晓芳",money:300,note:""},{id:50,name:"张灯",money:200,note:""},{id:51,name:"张灯远",money:200,note:""},{id:52,name:"张自勇",money:100,note:""},{id:53,name:"张自平",money:100,note:""},{id:54,name:"牟华",money:200,note:""},{id:55,name:"牟方绪",money:200,note:""},{id:56,name:"郭登安",money:200,note:""},{id:57,name:"牟方应",money:200,note:""},{id:58,name:"张清奎",money:200,note:""},{id:59,name:"张清雄",money:200,note:""},{id:60,name:"张四",money:300,note:""},{id:61,name:"杨正峰",money:200,note:""},{id:62,name:"张毅（大毛）",money:200,note:""},{id:63,name:"张锐",money:200,note:""},{id:64,name:"彭恒中",money:200,note:""},{id:65,name:"吴胜大",money:200,note:""},{id:66,name:"牟来梅",money:200,note:""},{id:67,name:"张自华",money:100,note:""},{id:68,name:"牟来远",money:10000,note:""},{id:69,name:"张宇",money:10000,note:""},{id:70,name:"胡忠平",money:100,note:""},{id:71,name:"胡高权",money:100,note:""},{id:72,name:"胡继成",money:100,note:""},{id:73,name:"张建豪",money:100,note:""},{id:74,name:"张建省",money:100,note:""},{id:75,name:"张文",money:100,note:""},{id:76,name:"温玲",money:100,note:""},{id:77,name:"王道友",money:100,note:""},{id:78,name:"彭丽萍",money:200,note:""},{id:79,name:"刘选贵",money:100,note:""},{id:80,name:"刘选家",money:100,note:""},{id:81,name:"牟建华",money:100,note:""},{id:82,name:"黄晓武",money:300,note:""},{id:83,name:"刘建国",money:400,note:""},{id:84,name:"孙秀娟",money:200,note:""},{id:85,name:"陈立光",money:200,note:""},{id:86,name:"张宗琼",money:200,note:""},{id:87,name:"姚珍",money:200,note:""},{id:88,name:"杨银娥",money:200,note:""},{id:89,name:"郑春艳",money:200,note:""},{id:90,name:"李桃花",money:100,note:""},{id:91,name:"方淑",money:200,note:""},{id:92,name:"黄文才",money:300,note:""},{id:93,name:"方荣",money:100,note:""},{id:94,name:"张宗艳",money:100,note:""},{id:95,name:"郭玲",money:200,note:""},{id:96,name:"周长群",money:200,note:""},{id:97,name:"陈秋兰",money:200,note:""},{id:98,name:"方春华",money:100,note:""},{id:99,name:"兰兴斌",money:200,note:""},{id:100,name:"潘久成",money:200,note:""},{id:101,name:"杨世琼",money:200,note:""},{id:102,name:"孙艳林",money:200,note:""},{id:103,name:"张平",money:200,note:""},{id:104,name:"刘玉娥",money:100,note:""},{id:105,name:"彭春萍",money:100,note:""},{id:106,name:"牟翠菊",money:100,note:""},{id:107,name:"付菊芝",money:200,note:""},{id:108,name:"吴文春",money:200,note:""},{id:109,name:"李红亚",money:200,note:""},{id:110,name:"向琼",money:200,note:""},{id:111,name:"陈会荣",money:200,note:""},{id:112,name:"张自华",money:100,note:""},{id:113,name:"张成毅",money:100,note:""},{id:114,name:"张俊",money:100,note:""},{id:115,name:"邓友付",money:100,note:""},{id:116,name:"邓家友",money:100,note:""},{id:117,name:"牟方会",money:300,note:""},{id:118,name:"牟方杰",money:300,note:""},{id:119,name:"陈定方",money:200,note:""},{id:120,name:"张民文",money:200,note:""},{id:121,name:"牟方学",money:200,note:""},{id:122,name:"牟方安",money:200,note:""},{id:123,name:"牟方道",money:200,note:""},{id:124,name:"牟方恩",money:200,note:""},{id:125,name:"牟方伟",money:200,note:""},{id:126,name:"张永明",money:100,note:""},{id:127,name:"张耀明",money:100,note:""},{id:128,name:"牟来永",money:200,note:""},{id:129,name:"黄成多",money:200,note:""},{id:130,name:"张艳玲",money:100,note:""},{id:131,name:"魏高",money:200,note:""},{id:132,name:"张自安",money:200,note:""},{id:133,name:"张自春",money:300,note:""},{id:134,name:"牟方胜",money:100,note:""},{id:135,name:"牟方敏",money:200,note:""},{id:136,name:"牟利强",money:100,note:""},{id:137,name:"张明宽",money:200,note:""},{id:138,name:"牟来彪",money:100,note:""},{id:139,name:"牟红晏",money:100,note:""},{id:140,name:"郑雅丹",money:500,note:""},{id:141,name:"郑成臣",money:500,note:""},{id:142,name:"谭光英",money:500,note:""},{id:143,name:"张建平",money:100,note:""},{id:144,name:"谭光祥",money:500,note:""},{id:145,name:"丁双权",money:100,note:""},{id:146,name:"张琼英",money:500,note:""},{id:147,name:"张常明",money:1000,note:""},{id:148,name:"谭光勇",money:500,note:""},{id:149,name:"牟伦泽",money:100,note:""},{id:150,name:"牟军辉",money:100,note:""},{id:151,name:"邓友福",money:100,note:""},{id:152,name:"邓友洲",money:200,note:""},{id:153,name:"邓洪敏",money:200,note:""},{id:154,name:"张明渊",money:200,note:""},{id:155,name:"牟高红",money:200,note:""},{id:156,name:"张清银",money:100,note:""},{id:157,name:"杨勇",money:100,note:""},{id:158,name:"武万奎",money:100,note:""},{id:159,name:"武锋利",money:100,note:""},{id:160,name:"张德美",money:300,note:""},{id:161,name:"张德兵",money:100,note:""},{id:162,name:"张民发",money:100,note:""},{id:163,name:"丁勇（黄田）",money:100,note:""},{id:164,name:"黄军",money:100,note:""},{id:165,name:"牟建冬",money:200,note:""},{id:166,name:"陆振兵",money:100,note:""},{id:167,name:"张鑫（一队）",money:100,note:""},{id:168,name:"张锐（一队）",money:100,note:""},{id:169,name:"邓如顺",money:100,note:""},{id:170,name:"向信平",money:200,note:""},{id:171,name:"向信权",money:300,note:""},{id:172,name:"张自敏",money:200,note:""},{id:173,name:"张自锐",money:200,note:""},{id:174,name:"张文星",money:200,note:""},{id:175,name:"张利社",money:300,note:""},{id:176,name:"张利蓉",money:200,note:""},{id:177,name:"张利勇",money:200,note:""},{id:178,name:"张爱华",money:200,note:""},{id:179,name:"张民然",money:300,note:""},{id:180,name:"张民理",money:200,note:""},{id:181,name:"牟高才",money:200,note:""},{id:182,name:"牟友才",money:100,note:""},{id:183,name:"王杰明",money:200,note:""},{id:184,name:"邓小明",money:300,note:""},{id:185,name:"邓小龙",money:200,note:""},{id:186,name:"黄舵",money:200,note:""},{id:187,name:"张民志",money:200,note:""},{id:188,name:"牟来刚",money:100,note:""},{id:189,name:"钟银艳",money:100,note:""},{id:190,name:"叶玲",money:500,note:""},{id:191,name:"叶良兵",money:500,note:""},{id:192,name:"叶茂",money:500,note:""},{id:193,name:"张自举",money:200,note:""},{id:194,name:"张自新",money:200,note:""},{id:195,name:"张自旺",money:200,note:""},{id:196,name:"李立",money:3000,note:"被子一床，灯笼一对"},{id:197,name:"付成峰",money:1000,note:""},{id:198,name:"胡胜超",money:1000,note:""},{id:199,name:"张伶俐",money:600,note:""},{id:200,name:"张艺丹",money:500,note:""},{id:201,name:"张艺瑾",money:500,note:""},{id:202,name:"张宗健",money:500,note:""},{id:203,name:"谭明浩",money:200,note:""},{id:204,name:"牟超",money:200,note:""},{id:205,name:"杨大兵",money:200,note:""},{id:206,name:"张锦富",money:200,note:""},{id:207,name:"胡胜坤",money:1000,note:""},{id:208,name:"陈华艳",money:200,note:""},{id:209,name:"陈代碧",money:200,note:""},{id:210,name:"陈林",money:200,note:""},{id:211,name:"杨勇（杨大毛）",money:2000,note:""},{id:212,name:"胡红武",money:1000,note:""},{id:213,name:"胡胜进",money:1000,note:""},{id:214,name:"胡芳艳",money:500,note:""},{id:215,name:"胡胜锐",money:500,note:""},{id:216,name:"牟涛",money:100,note:""},{id:217,name:"徐锋",money:200,note:""},{id:218,name:"张成志",money:200,note:""},{id:219,name:"钟敏",money:200,note:""},{id:220,name:"张明科",money:100,note:""},{id:221,name:"胡胜曦",money:300,note:""},{id:222,name:"胡胜兵",money:300,note:""},{id:223,name:"胡红俊",money:300,note:""},{id:224,name:"胡兴明",money:500,note:""},{id:225,name:"胡艳玲",money:200,note:""},{id:226,name:"冉依依",money:300,note:""},{id:227,name:"冉毅",money:200,note:""},{id:228,name:"冉平",money:200,note:""},{id:229,name:"阳池全",money:300,note:""},{id:230,name:"熊坤林",money:200,note:""},{id:231,name:"何再平",money:300,note:""},{id:232,name:"向林信",money:200,note:""},{id:233,name:"向锋",money:300,note:""},{id:234,name:"李崇双",money:200,note:""},{id:235,name:"张福权",money:200,note:""},{id:236,name:"张颖",money:200,note:""},{id:237,name:"蒲东华",money:200,note:""},{id:238,name:"李书成",money:100,note:""},{id:239,name:"李书刚",money:200,note:""},{id:240,name:"牟玉娥",money:300,note:""},{id:241,name:"张定琼",money:300,note:""},{id:242,name:"王国树",money:300,note:""},{id:243,name:"李书发",money:200,note:""},{id:244,name:"李书生",money:200,note:""},{id:245,name:"李祥光",money:200,note:""},{id:246,name:"李浪",money:200,note:""},{id:247,name:"李超",money:100,note:""},{id:248,name:"张民会",money:100,note:""},{id:249,name:"张自超（黄田）",money:200,note:""},{id:250,name:"李再友",money:100,note:""},{id:251,name:"张自良",money:200,note:""},{id:252,name:"张明齐",money:100,note:""}
+];
+
+let show = [...data];
+let moneySortAsc = false;
+
+function calcStats() {
+  const count = show.length;
+  const total = show.reduce((s, item) => s + item.money, 0);
+  document.getElementById("totalCount").innerText = count + " 户";
+  document.getElementById("totalMoney").innerText = total + " 元";
+}
+
+function render(){
+  const el = document.getElementById("list");
+  el.innerHTML = "";
+  show.forEach(item=>{
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${item.id}</td>
+      <td class="name">${item.name}</td>
+      <td>${item.money}</td>
+      <td>${item.note}</td>
+    `;
+    el.appendChild(tr);
+  })
+  calcStats();
+}
+
+function search(){
+  const kw = document.getElementById("search").value.trim();
+  if(!kw){ render(); return; }
+  show = data.filter(item=>item.name.includes(kw));
+  render();
+}
+
+function reset(){
+  document.getElementById("search").value = "";
+  show = [...data];
+  moneySortAsc = false;
+  render();
+}
+
+function sortByMoney() {
+  moneySortAsc = !moneySortAsc;
+  show.sort((a, b) => moneySortAsc ? a.money - b.money : b.money - a.money);
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
