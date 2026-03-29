@@ -61,7 +61,7 @@ body {
   100% { transform: rotate(360deg); }
 }
 
-/* 轮播图 美化版 */
+/* 轮播图 修复美化版 */
 .swiper {
   max-width: 480px;
   height: 240px;
@@ -70,13 +70,19 @@ body {
   overflow: hidden;
   position: relative;
   box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.swiper.show {
+  visibility: visible;
+  opacity: 1;
 }
 .swiper-wrap {
   display: flex;
   width: 300%;
   height: 100%;
-  transition: 0.5s ease;
+  transition: transform 0.5s ease;
 }
 .swiper-item {
   width: 100%;
@@ -381,14 +387,15 @@ function toggleMusic() {
 
 // 轮播图自动播放
 let swiperIndex = 0;
+const swiperWrap = document.getElementById('swiperWrap');
 const dots = document.querySelectorAll('.dot');
+
 function autoSwiper(){
   swiperIndex++;
   if(swiperIndex >= 3) swiperIndex = 0;
-  document.getElementById('swiperWrap').style.transform = `translateX(-${swiperIndex * 100}%)`;
+  swiperWrap.style.transform = `translateX(-${swiperIndex * 100}%)`;
   dots.forEach((d,i) => d.classList.toggle('active', i === swiperIndex));
 }
-setInterval(autoSwiper, 4000);
 
 // 登录
 function login() {
@@ -399,7 +406,11 @@ function login() {
     document.getElementById('copyLogin').style.display = 'none';
     document.getElementById('mainBox').style.display = 'block';
     document.getElementById('copyMain').style.display = 'block';
-    document.getElementById('swiperBox').style.display = 'block';
+    
+    // 显示轮播图（修复关键）
+    const swiper = document.getElementById('swiperBox');
+    swiper.classList.add('show');
+    
     document.getElementById('musicBtn').style.display = 'flex';
     
     // 登录自动播放音乐
@@ -419,6 +430,9 @@ const data = [
 
 let show = [...data];
 let moneySortAsc = false;
+
+// 启动轮播
+setInterval(autoSwiper, 4000);
 
 function calcStats() {
   const count = show.length;
