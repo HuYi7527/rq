@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>千金胡言出阁 - 人情礼簿</title>
-      <link rel="icon" href="rq.JPG" type="image/JPG">
-    
-    <meta property="og:title" content="千金胡言出阁 - 人情礼簿">
-    <meta property="og:description" content="胡燚研发定制">
-    <meta property="og:image" content="https://huyi7527.github.io/rq/rq.JPG">
-    <meta property="og:url" content="https://huyi7527.github.io/rq/">
-    <meta property="og:type" content="website">
-    
-    <meta itemprop:name" content="千金胡言出阁 - 人情礼簿">
-    <meta itemprop:description" content="胡燚研发定制">
-    <meta itemprop:image" content="https://huyi7527.github.io/rq/rq.JPG">
+<link rel="icon" href="rq.JPG" type="image/JPG">
+
+<meta property="og:title" content="千金胡言出阁 - 人情礼簿">
+<meta property="og:description" content="胡燚研发定制">
+<meta property="og:image" content="rq.JPG">
+<meta property="og:url" content="https://huyi7527.github.io/rq/">
+<meta property="og:type" content="website">
+
+<meta itemprop="name" content="千金胡言出阁 - 人情礼簿">
+<meta itemprop="description" content="胡燚研发定制">
+<meta itemprop:image" content="rq.JPG">
 <style>
 * {
   margin: 0;
@@ -22,15 +22,23 @@
   box-sizing: border-box;
 }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
-  background: #fdf3f4;
+  font-family: -apple-system, BlinkMacMacFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: linear-gradient(135deg, #fff0f3, #ffe6ef);
   padding: 20px 12px;
+  min-height: 100vh;
+  animation: bgGrad 10s ease infinite;
+}
+@keyframes bgGrad {
+  0%{background: linear-gradient(135deg, #fff0f3, #ffe6ef);}
+  50%{background: linear-gradient(135deg, #ffe6ef, #fff0f3);}
+  100%{background: linear-gradient(135deg, #fff0f3, #ffe6ef);}
 }
 .time {
   text-align: center;
   font-size: 14px;
-  color: #666;
+  color: #c92a52;
   margin-bottom: 10px;
+  font-weight: 500;
 }
 
 /* 音乐按钮 */
@@ -38,51 +46,51 @@ body {
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 44px;
-  height: 44px;
-  background: #b32424;
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(135deg, #e63946, #c92a52);
   color: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 20px;
   z-index: 999;
-  box-shadow: 0 4px 15px rgba(179,36,36,0.3);
+  box-shadow: 0 6px 20px rgba(230,57,70,0.4);
   border: none;
   outline: none;
   display: none;
+  transition: all 0.3s;
+}
+.music-btn:hover {
+  transform: scale(1.1);
 }
 .music-btn.playing {
-  animation: rotate 3s linear infinite;
+  animation: rotate 3.5s linear infinite;
 }
 @keyframes rotate {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-/* 轮播图 修复美化版 */
+/* 轮播图 喜庆美化版 —— 修复大图显示不全 */
 .swiper {
   max-width: 480px;
-  height: 240px;
-  margin: 0 auto 20px;
-  border-radius: 20px;
+  height: auto;       /* 让高度自适应图片 */
+  aspect-ratio: 4/3;   /* 严格匹配你的图片比例 4128x3096 = 4:3 */
+  margin: 0 auto 24px;
+  border-radius: 24px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.swiper.show {
-  visibility: visible;
-  opacity: 1;
+  box-shadow: 0 12px 35px rgba(201,42,82,0.15);
+  display: none;
+  border: 3px solid #fff;
 }
 .swiper-wrap {
   display: flex;
   width: 300%;
   height: 100%;
-  transition: transform 0.5s ease;
+  transition: 0.6s cubic-bezier(0.25,0.1,0.25,1);
 }
 .swiper-item {
   width: 100%;
@@ -91,81 +99,99 @@ body {
 .swiper-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover;    /* 保持比例填满容器 */
+  object-position: center; /* 居中显示 */
   display: block;
 }
 /* 轮播指示器 */
 .swiper-dots {
   position: absolute;
-  bottom: 12px;
+  bottom: 15px;
   left: 0;
   right: 0;
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
 }
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.4);
+  transition: 0.3s;
 }
 .dot.active {
   background: #fff;
-  width: 18px;
-  border-radius: 4px;
+  width: 22px;
+  border-radius: 6px;
 }
 
 /* 登录页 */
 .login-box {
   max-width: 400px;
-  margin: 40px auto 0;
+  margin: 50px auto 0;
   background: #fff;
-  border-radius: 24px;
-  padding: 40px 30px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  border-radius: 28px;
+  padding: 45px 32px;
+  box-shadow: 0 15px 45px rgba(201,42,82,0.12);
   text-align: center;
+  animation: fadeIn 0.8s ease;
+  border: 1px solid rgba(201,42,82,0.1);
+}
+@keyframes fadeIn {
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
 }
 .login-title {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
-  color: #b32424;
-  margin-bottom: 10px;
+  background: linear-gradient(90deg, #e63946, #c92a52);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 12px;
 }
 .login-sub {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 30px;
+  font-size: 15px;
+  color: #777;
+  margin-bottom: 35px;
 }
 .login-input {
   width: 100%;
-  height: 48px;
-  border: 1px solid #eee;
-  border-radius: 12px;
-  padding: 0 16px;
+  height: 52px;
+  border: 1px solid #f5d0d9;
+  border-radius: 16px;
+  padding: 0 18px;
   font-size: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   outline: none;
+  transition: 0.3s;
 }
 .login-input:focus {
-  border-color: #b32424;
+  border-color: #e63946;
+  box-shadow: 0 0 0 3px rgba(230,57,70,0.1);
 }
 .login-btn {
   width: 100%;
-  height: 48px;
-  border-radius: 12px;
-  background: #b32424;
+  height: 52px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #e63946, #c92a52);
   color: #fff;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   border: none;
   cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 6px 15px rgba(230,57,70,0.25);
+}
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(230,57,70,0.35);
 }
 .copyright {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 35px;
   font-size: 12px;
-  color: #999;
+  color: #b88;
 }
 
 /* 主内容页 */
@@ -173,73 +199,88 @@ body {
   max-width: 480px;
   margin: 0 auto;
   background: #fff;
-  border-radius: 20px;
-  padding: 22px 18px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  border-radius: 24px;
+  padding: 26px 20px;
+  box-shadow: 0 12px 40px rgba(201,42,82,0.1);
   display: none;
+  animation: fadeIn 0.6s ease;
+  border: 1px solid rgba(201,42,82,0.08);
 }
 .main-title {
   text-align: center;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
-  color: #b32424;
-  margin-bottom: 6px;
+  background: linear-gradient(90deg, #e63946, #c92a52);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 8px;
   white-space: nowrap;
 }
 .main-date {
   text-align: center;
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 16px;
+  font-size: 15px;
+  color: #999;
+  margin-bottom: 20px;
 }
 .stats {
   display: flex;
   justify-content: space-around;
-  background: #fff5f5;
-  border-radius: 12px;
-  padding: 12px 0;
-  margin-bottom: 16px;
+  background: linear-gradient(90deg, #fff5f7, #fff0f5);
+  border-radius: 16px;
+  padding: 16px 0;
+  margin-bottom: 20px;
+  border: 1px solid rgba(201,42,82,0.08);
 }
 .stat-item {
   text-align: center;
 }
 .stat-label {
-  font-size: 12px;
-  color: #888;
+  font-size: 13px;
+  color: #a77;
 }
 .stat-num {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
-  color: #b32424;
+  color: #e63946;
+  margin-top: 4px;
 }
 .search-box {
   display: flex;
-  gap: 8px;
-  margin-bottom: 14px;
+  gap: 10px;
+  margin-bottom: 18px;
 }
 input {
   flex: 1;
-  height: 40px;
-  border: 1px solid #eee;
-  border-radius: 10px;
-  padding: 0 12px;
+  height: 44px;
+  border: 1px solid #f5d0d9;
+  border-radius: 12px;
+  padding: 0 15px;
   font-size: 15px;
   outline: none;
+  transition: 0.3s;
+}
+input:focus {
+  border-color: #e63946;
 }
 .btn {
-  height: 40px;
-  padding: 0 12px;
-  border-radius: 10px;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 12px;
   border: none;
-  background: #b32424;
+  background: linear-gradient(90deg, #e63946, #c92a52);
   color: #fff;
-  font-size: 14px;
+  font-size: 15px;
   white-space: nowrap;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn:hover {
+  transform: scale(1.05);
 }
 .table-box {
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  border: 1px solid #f0f0f0;
+  border: 1px solid #f8e6eb;
   background: #fff;
 }
 table {
@@ -247,29 +288,109 @@ table {
   border-collapse: collapse;
 }
 th {
-  background: #b32424;
+  background: linear-gradient(90deg, #e63946, #c92a52);
   color: #fff;
-  font-size: 14px;
-  padding: 10px 0;
+  font-size: 15px;
+  padding: 12px 0;
   font-weight: 500;
   cursor: pointer;
 }
 td {
   text-align: center;
-  padding: 9px 0;
-  font-size: 14px;
-  border-bottom: 1px solid #f6f6f6;
+  padding: 11px 0;
+  font-size: 15px;
+  border-bottom: 1px solid #f9f0f3;
+  transition: 0.2s;
+}
+tbody tr:hover {
+  background: #fff5f7;
 }
 .name {
   font-weight: 500;
-  color: #222;
+  color: #c92a52;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.name:hover {
+  color: #e63946;
+  text-decoration: underline;
 }
 .main-copyright {
   text-align: center;
-  margin-top: 18px;
+  margin-top: 22px;
   font-size: 12px;
-  color: #999;
+  color: #aaa;
   display: none;
+}
+
+/* 详情弹窗 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: modalBg 0.3s ease;
+}
+@keyframes modalBg {
+  from{opacity:0;}
+  to{opacity:1;}
+}
+.modal-content {
+  background: #fff;
+  width: 90%;
+  max-width: 380px;
+  border-radius: 24px;
+  padding: 35px 25px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  text-align: center;
+  animation: modalIn 0.4s ease;
+  position: relative;
+}
+@keyframes modalIn {
+  from{opacity:0;transform: scale(0.9) translateY(20px);}
+  to{opacity:1;transform: scale(1) translateY(0);}
+}
+.modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 22px;
+  color: #999;
+  cursor: pointer;
+}
+.modal-title {
+  font-size: 22px;
+  color: #e63946;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.modal-item {
+  margin: 12px 0;
+  font-size: 16px;
+  color: #444;
+}
+.modal-item span {
+  color: #e63946;
+  font-weight: 500;
+}
+.modal-money {
+  font-size: 18px;
+  font-weight: 700;
+  color: #e63946;
+  margin: 10px 0;
+}
+.modal-note {
+  padding: 12px;
+  background: #f9f0f3;
+  border-radius: 12px;
+  color: #666;
+  margin-top: 15px;
 }
 </style>
 </head>
@@ -283,12 +404,13 @@ td {
 <!-- 时间 -->
 <div class="time" id="nowTime"></div>
 
-<!-- 轮播图 -->
+<!-- 轮播图 本地路径 -->
 <div class="swiper" id="swiperBox">
   <div class="swiper-wrap" id="swiperWrap">
-    <div class="swiper-item"><img src="https://huyi7527.github.io/rq/rq1.JPG"></div>
-    <div class="swiper-item"><img src="https://huyi7527.github.io/rq/rq2.JPG"></div>
-    <div class="swiper-item"><img src="https://huyi7527.github.io/rq/rq3.JPG"></div>
+    <div class="swiper-item"><img src="rq1.JPG"></div>
+    <div class="swiper-item"><img src="rq2.JPG"></div>
+    <div class="swiper-item"><img src="rq3.JPG"></div>
+
   </div>
   <div class="swiper-dots" id="swiperDots">
     <div class="dot active"></div>
@@ -347,6 +469,19 @@ td {
   </div>
 </div>
 
+<!-- 详情弹窗 -->
+<div class="modal" id="detailModal">
+  <div class="modal-content">
+    <div class="modal-close" onclick="closeModal()">×</div>
+    <div class="modal-title">礼金详情</div>
+    <div class="modal-item">编号：<span id="mId">-</span></div>
+    <div class="modal-item">姓名：<span id="mName">-</span></div>
+    <div class="modal-item">金额：<span id="mMoney">-</span> 元</div>
+    <div class="modal-money">大写：<span id="mUpper">-</span></div>
+    <div class="modal-note" id="mNote">无备注</div>
+  </div>
+</div>
+
 <div class="main-copyright" id="copyMain">
   版权所有 © 2026 胡燚｜专业定制开发
 </div>
@@ -387,14 +522,41 @@ function toggleMusic() {
 
 // 轮播图自动播放
 let swiperIndex = 0;
-const swiperWrap = document.getElementById('swiperWrap');
 const dots = document.querySelectorAll('.dot');
-
 function autoSwiper(){
   swiperIndex++;
   if(swiperIndex >= 3) swiperIndex = 0;
-  swiperWrap.style.transform = `translateX(-${swiperIndex * 100}%)`;
+  document.getElementById('swiperWrap').style.transform = `translateX(-${swiperIndex * 100}%)`;
   dots.forEach((d,i) => d.classList.toggle('active', i === swiperIndex));
+}
+setInterval(autoSwiper, 4000);
+
+// 金额大写转换
+function digitToUpper(num) {
+  const digit = ['零','壹','贰','叁','肆','伍','陆','柒','捌','玖'];
+  const unit = ['','拾','佰','仟','万'];
+  let str = num.toString().split('').reverse();
+  let res = '';
+  for(let i=0;i<str.length;i++){
+    let n = parseInt(str[i]);
+    if(n!==0) res = digit[n] + unit[i] + res;
+    else if(res[0]!==digit[0]) res = digit[0] + res;
+  }
+  res = res.replace(/零+/g,'零').replace(/零$/,'') + '元整';
+  return res || '零元整';
+}
+
+// 弹窗
+function openModal(item) {
+  document.getElementById('mId').innerText = item.id;
+  document.getElementById('mName').innerText = item.name;
+  document.getElementById('mMoney').innerText = item.money;
+  document.getElementById('mUpper').innerText = digitToUpper(item.money);
+  document.getElementById('mNote').innerText = item.note || '无备注';
+  document.getElementById('detailModal').style.display = 'flex';
+}
+function closeModal() {
+  document.getElementById('detailModal').style.display = 'none';
 }
 
 // 登录
@@ -406,14 +568,9 @@ function login() {
     document.getElementById('copyLogin').style.display = 'none';
     document.getElementById('mainBox').style.display = 'block';
     document.getElementById('copyMain').style.display = 'block';
-    
-    // 显示轮播图（修复关键）
-    const swiper = document.getElementById('swiperBox');
-    swiper.classList.add('show');
-    
+    document.getElementById('swiperBox').style.display = 'block';
     document.getElementById('musicBtn').style.display = 'flex';
     
-    // 登录自动播放音乐
     bgMusic.play().catch(err => {});
     isPlaying = true;
     musicBtn.classList.add('playing');
@@ -431,9 +588,6 @@ const data = [
 let show = [...data];
 let moneySortAsc = false;
 
-// 启动轮播
-setInterval(autoSwiper, 4000);
-
 function calcStats() {
   const count = show.length;
   const total = show.reduce((s, item) => s + item.money, 0);
@@ -448,7 +602,7 @@ function render(){
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${item.id}</td>
-      <td class="name">${item.name}</td>
+      <td class="name" onclick="openModal(${JSON.stringify(item).replace(/"/g, '&quot;')})">${item.name}</td>
       <td>${item.money}</td>
       <td>${item.note}</td>
     `;
